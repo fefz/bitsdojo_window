@@ -88,7 +88,7 @@ class WinWindow extends WinDesktopWindow {
   double systemMetric(int metric, {int dpiToUse = 0}) {
     final windowDpi = dpiToUse != 0 ? dpiToUse : this.dpi;
     double result = dpiAware
-      ? GetSystemMetricsForDpi(metric, windowDpi).toDouble()
+      ? GetSystemMetrics(metric, windowDpi).toDouble()
       : GetSystemMetrics(metric).toDouble();
     return result;
   }
@@ -99,7 +99,8 @@ class WinWindow extends WinDesktopWindow {
 
   int get dpi {
     if (!dpiAware || !isValidHandle(handle, "get dpi")) return 96;
-    return GetDpiForWindow(handle!);
+    // return FlutterDesktopGetDpiForHWND(handle!);
+    return 96;
   }
 
   double get scaleFactor {

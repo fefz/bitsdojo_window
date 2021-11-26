@@ -3,6 +3,7 @@
 #include <windowsx.h>
 #include <dwmapi.h>
 #include <math.h>
+#include <flutter_windows.h>
 #include "./bitsdojo_window_common.h"
 #include "bitsdojo_window.h"
 #include "./window_util.h"
@@ -10,8 +11,8 @@
 
 namespace bitsdojo_window {
 
-    UINT (*GetDpiForWindow) (HWND) = [] (HWND) { return 96u; };
-    int (*GetSystemMetricsForDpi) (int, UINT) = [] (int nIndex, UINT) { return GetSystemMetrics(nIndex); };
+    UINT (*FlutterDesktopGetDpiForHWND) (HWND) = [] (HWND) { return 96u; };
+    int (*GetSystemMetrics) (int, UINT) = [] (int nIndex, UINT) { return GetSystemMetrics(nIndex); };
 
     HWND flutter_window = nullptr;
     HWND flutter_child_window = nullptr;
@@ -48,11 +49,11 @@ namespace bitsdojo_window {
         is_bitsdojo_window_loaded = true;
         if (auto user32 = LoadLibraryA("User32.dll"))
         {
-            if (auto fn = GetProcAddress(user32, "GetDpiForWindow"))
+            if (auto fn = GetProcAddress(user32, "FlutterDesktopGetDpiForHWND"))
             {
                 is_dpi_aware = true;
-                GetDpiForWindow = (decltype(GetDpiForWindow)) fn;
-                GetSystemMetricsForDpi = (decltype(GetSystemMetricsForDpi)) GetProcAddress(user32, "GetSystemMetricsForDpi");
+                FlutterDesktopGetDpiForHWND = (decltype(FlutterDesktopGetDpiForHWND)) fn;
+                GetSystemMetrics = (decltype(GetSystemMetrics)) GetProcAddress(user32, "GetSystemMetrics");
             }
         }
         monitorFlutterWindows();
@@ -152,9 +153,9 @@ namespace bitsdojo_window {
 
     int getResizeMargin(HWND window)
     {
-        UINT currentDpi = GetDpiForWindow(window);
-        int resizeBorder = GetSystemMetricsForDpi(SM_CXSIZEFRAME, currentDpi);
-        int borderPadding = GetSystemMetricsForDpi(SM_CXPADDEDBORDER, currentDpi);
+        UINT currentDpi = FlutterDesktopGetDpiForHWND(window);
+        int resizeBorder = GetSystemMetrics(SM_CXSIZEFRAME, currentDpi);
+        int borderPadding = GetSystemMetrics(SM_CXPADDEDBORDER, currentDpi);
         bool isMaximized = IsZoomed(window);
         if (isMaximized) {
             return borderPadding;
@@ -269,7 +270,7 @@ namespace bitsdojo_window {
     }
 
     double getScaleFactor(HWND window) {
-        UINT dpi = GetDpiForWindow(window);
+        UINT dpi = FlutterDesktopGetDpiForHWND(window);
         return dpi / 96.0;
     }
 
@@ -355,7 +356,7 @@ namespace bitsdojo_window {
 
     void getSizeOnScreen(SIZE* size)
     {
-        UINT dpi = GetDpiForWindow(flutter_window);
+        UINT dpi = FlutterDesktopGetDpiForHWND(flutter_window);
         double scale_factor = dpi / 96.0;
         size->cx = static_cast<int>(size->cx * scale_factor);
         size->cy = static_cast<int>(size->cy * scale_factor);
