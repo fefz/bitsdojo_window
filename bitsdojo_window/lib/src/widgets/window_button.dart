@@ -25,12 +25,12 @@ class WindowButtonContext {
 }
 
 class WindowButtonColors {
-   Color normal;
-   Color mouseOver;
-   Color mouseDown;
-   Color iconNormal;
-   Color iconMouseOver;
-   Color iconMouseDown;
+  Color normal;
+  Color mouseOver;
+  Color mouseDown;
+  Color iconNormal;
+  Color iconMouseOver;
+  Color iconMouseDown;
   WindowButtonColors(
       {Color normal,
       Color mouseOver,
@@ -58,7 +58,7 @@ final _defaultButtonColors = WindowButtonColors(
 class WindowButton extends StatelessWidget {
   final WindowButtonBuilder builder;
   final WindowButtonIconBuilder iconBuilder;
-  final WindowButtonColors colors;
+  WindowButtonColors colors;
   final bool animate;
   final EdgeInsets padding;
   final VoidCallback onPressed;

@@ -19,7 +19,7 @@ bool isValidHandle(int handle, String operation) {
 }
 
 class CachedWindowInfo {
-  Rect rect;
+  var rect;
 }
 
 Rect getScreenRectForWindow(int handle) {
@@ -34,10 +34,10 @@ Rect getScreenRectForWindow(int handle) {
 }
 
 class GtkWindow extends DesktopWindow {
-  int handle;
-  Size _minSize;
-  Size _maxSize;
-  Alignment _alignment;
+  var handle = 0;
+  var _minSize = null;
+  var _maxSize = null;
+  var _alignment = null;
   // size and position are cached during doWhenWindowReady
   // because the window operations for setting size/position
   // are scheduled and do not run immediately so the results
@@ -184,8 +184,7 @@ class GtkWindow extends DesktopWindow {
       //TODO - add handling for setting minSize to null
       return;
     }
-    native.setMinSize(
-        handle, minSize.width.toInt(), minSize.height.toInt());
+    native.setMinSize(handle, _minSize.width.toInt(), _minSize.height.toInt());
   }
 
   @override
@@ -197,8 +196,7 @@ class GtkWindow extends DesktopWindow {
       //TODO - add handling for setting maxSize to null
       return;
     }
-    native.setMaxSize(
-        handle, _maxSize.width.toInt(), _maxSize.height.toInt());
+    native.setMaxSize(handle, _maxSize.width.toInt(), _maxSize.height.toInt());
   }
 
   @override
@@ -208,7 +206,7 @@ class GtkWindow extends DesktopWindow {
     var width = newSize.width;
 
     if (_minSize != null) {
-      if (newSize.width < minSize.width) width = minSize.width;
+      if (newSize.width < _minSize.width) width = _minSize.width;
     }
 
     if (_maxSize != null) {
@@ -218,7 +216,7 @@ class GtkWindow extends DesktopWindow {
     var height = newSize.height;
 
     if (_minSize != null) {
-      if (newSize.height < minSize.height) height = minSize.height;
+      if (newSize.height < _minSize.height) height = _minSize.height;
     }
 
     if (_maxSize != null) {
@@ -233,8 +231,7 @@ class GtkWindow extends DesktopWindow {
     _cached.rect = Rect.fromLTWH(left, top, width, height);
 
     if (_alignment == null) {
-      native.setSize(
-          handle, sizeToSet.width.toInt(), sizeToSet.height.toInt());
+      native.setSize(handle, sizeToSet.width.toInt(), sizeToSet.height.toInt());
       //native.setWindowSize(handle, sizeToSet);
     } else {
       final sizeOnScreen = getSizeOnScreen((sizeToSet));

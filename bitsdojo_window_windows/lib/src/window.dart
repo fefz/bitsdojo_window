@@ -37,13 +37,13 @@ Rect getScreenRectForWindow(int handle) {
 
 class WinWindow extends WinDesktopWindow {
   static final dpiAware = native.isDPIAware();
-  int handle;
-  Size _minSize;
-  Size _maxSize;
+  var handle = 0;
+  var _minSize = null;
+  var _maxSize = null;
   // We use this for reporting size inside doWhenWindowReady
   // as GetWindowRect might not work reliably before window is shown on screen
-  Size _sizeSetFromDart;
-  Alignment _alignment;
+  var _sizeSetFromDart = null;
+  var _alignment = null;
 
   void setWindowCutOnMaximize(int value) {
     native.setWindowCutOnMaximize(value);
@@ -88,8 +88,8 @@ class WinWindow extends WinDesktopWindow {
   double systemMetric(int metric, {int dpiToUse = 0}) {
     final windowDpi = dpiToUse != 0 ? dpiToUse : this.dpi;
     double result = dpiAware
-      ? GetSystemMetricsForDpi(metric, windowDpi).toDouble()
-      : GetSystemMetrics(metric).toDouble();
+        ? GetSystemMetricsForDpi(metric, windowDpi).toDouble()
+        : GetSystemMetrics(metric).toDouble();
     return result;
   }
 
@@ -152,8 +152,7 @@ class WinWindow extends WinDesktopWindow {
     if (_alignment != null) {
       if (!isValidHandle(handle, "set alignment")) return;
       final screenRect = getScreenRectForWindow(handle);
-      final rectOnScreen =
-          getRectOnScreen(sizeOnScreen, alignment, screenRect);
+      final rectOnScreen = getRectOnScreen(sizeOnScreen, alignment, screenRect);
       this.rect = rectOnScreen;
     }
   }
@@ -161,19 +160,19 @@ class WinWindow extends WinDesktopWindow {
   set minSize(Size newSize) {
     _minSize = newSize;
     if (newSize == null) {
-      //TODO - add handling for setting minSize to null
+      //TODO - add handling for setting _minSize to null
       return;
     }
-    native.setMinSize(minSize.width.toInt(), minSize.height.toInt());
+    native.setMinSize(_minSize.width.toInt(), _minSize.height.toInt());
   }
 
   set maxSize(Size newSize) {
     _maxSize = newSize;
     if (newSize == null) {
-      //TODO - add handling for setting maxSize to null
+      //TODO - add handling for setting _maxSize to null
       return;
     }
-    native.setMaxSize(maxSize.width.toInt(), maxSize.height.toInt());
+    native.setMaxSize(_maxSize.width.toInt(), _maxSize.height.toInt());
   }
 
   set size(Size newSize) {
@@ -182,21 +181,21 @@ class WinWindow extends WinDesktopWindow {
     var width = newSize.width;
 
     if (_minSize != null) {
-      if (newSize.width < minSize.width) width = minSize.width;
+      if (newSize.width < _minSize.width) width = _minSize.width;
     }
 
     if (_maxSize != null) {
-      if (newSize.width > maxSize.width) width = maxSize.width;
+      if (newSize.width > _maxSize.width) width = _maxSize.width;
     }
 
     var height = newSize.height;
 
     if (_minSize != null) {
-      if (newSize.height < minSize.height) height = minSize.height;
+      if (newSize.height < _minSize.height) height = _minSize.height;
     }
 
     if (_maxSize != null) {
-      if (newSize.height > maxSize.height) height = maxSize.height;
+      if (newSize.height > _maxSize.height) height = _maxSize.height;
     }
 
     Size sizeToSet = Size(width, height);

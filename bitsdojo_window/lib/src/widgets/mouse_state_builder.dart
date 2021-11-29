@@ -23,7 +23,7 @@ class MouseStateBuilder extends StatefulWidget {
 }
 
 class _MouseStateBuilderState extends State<MouseStateBuilder> {
-   MouseState _mouseState;
+  MouseState _mouseState;
   _MouseStateBuilderState() {
     _mouseState = MouseState();
   }
@@ -57,9 +57,9 @@ class _MouseStateBuilderState extends State<MouseStateBuilder> {
                 _mouseState.isMouseDown = false;
                 _mouseState.isMouseOver = false;
               });
-              WidgetsBinding.instance!.addPostFrameCallback((_) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (widget.onPressed != null) {
-                  widget.onPressed!();
+                  widget.onPressed();
                 }
               });
             },

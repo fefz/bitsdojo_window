@@ -13,12 +13,12 @@ bool isValidHandle(int handle, String operation) {
 }
 
 class MacOSWindow extends DesktopWindow {
-  int handle;
-  Size _minSize;
-  Size _maxSize;
-  Alignment _alignment;
-  bool _setTitleOnNextShow = false;
-  String _titleToSet;
+  var handle = 0;
+  var _minSize = null;
+  var _maxSize = null;
+  var _alignment = null;
+  var _setTitleOnNextShow = false;
+  var _titleToSet = null;
 
   MacOSWindow() {
     _alignment = Alignment.center;
@@ -45,10 +45,9 @@ class MacOSWindow extends DesktopWindow {
     var widthToSet = ((_minSize != null) && (newRect.width < _minSize.width))
         ? _minSize.width
         : newRect.width;
-    var heightToSet =
-        ((_minSize != null) && (newRect.height < _minSize.height))
-            ? _minSize.height
-            : newRect.height;
+    var heightToSet = ((_minSize != null) && (newRect.height < _minSize.height))
+        ? _minSize.height
+        : newRect.height;
     final rectToSet =
         Rect.fromLTWH(newRect.left, newRect.top, widthToSet, heightToSet);
     setRectForWindow(handle, rectToSet);
@@ -75,8 +74,8 @@ class MacOSWindow extends DesktopWindow {
         return;
       }
       final windowRect =
-          getRectOnScreen(this.size, _alignment, screenInfo. workingRect);
-      final menuBarHeight = screenInfo. workingRect.top;
+          getRectOnScreen(this.size, _alignment, screenInfo.workingRect);
+      final menuBarHeight = screenInfo.workingRect.top;
       // We need to subtract menuBarHeight because .position uses
       // setFrameTopLeftPoint internally and that needs an offset
       // relative to the start of the working rectangle (after the menu bar)
@@ -137,7 +136,7 @@ class MacOSWindow extends DesktopWindow {
         return;
       }
       this.rect =
-          getRectOnScreen(sizeToSet, _alignment, screenInfo. workingRect);
+          getRectOnScreen(sizeToSet, _alignment, screenInfo.workingRect);
     }
   }
 
