@@ -13,7 +13,11 @@ dependencies:
     sdk: flutter
 #  bitsdojo_window_platform_interface: ^0.1.0
   bitsdojo_window_platform_interface:
-    path: ../bitsdojo_window_platform_interface
+#    path: ../bitsdojo_window_platform_interface
+    git:
+      url: https://github.com/fefz/bitsdojo_window
+      ref: local-path
+      path: bitsdojo_window_platform_interface/
   win32: ^2.0.0
   ffi: ^1.0.0
 
