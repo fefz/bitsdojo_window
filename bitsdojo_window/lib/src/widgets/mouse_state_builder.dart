@@ -23,7 +23,7 @@ class MouseStateBuilder extends StatefulWidget {
 }
 
 class _MouseStateBuilderState extends State<MouseStateBuilder> {
-  late MouseState _mouseState;
+   MouseState _mouseState;
   _MouseStateBuilderState() {
     _mouseState = MouseState();
   }

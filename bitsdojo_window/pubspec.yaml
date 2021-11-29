@@ -13,10 +13,10 @@ flutter:
     platforms:
       windows:
         default_package: bitsdojo_window_windows
-#      macos:
-#        default_package: bitsdojo_window_macos
-#      linux:
-#        default_package: bitsdojo_window_linux
+      macos:
+        default_package: bitsdojo_window_macos
+      linux:
+        default_package: bitsdojo_window_linux
 
 dependencies:
   flutter:
@@ -31,13 +31,13 @@ dependencies:
       url: https://github.com/fefz/bitsdojo_window
       ref: local-path
       path: bitsdojo_window_windows/
-#  bitsdojo_window_macos:
-#    git:
-#      url: https://github.com/fefz/bitsdojo_window
-#      ref: local-path
-#      path: bitsdojo_window_macos/
-#  bitsdojo_window_linux:
-#    git:
-#      url: https://github.com/fefz/bitsdojo_window
-#      ref: local-path
-#      path: bitsdojo_window_linux/
+  bitsdojo_window_macos:
+    git:
+      url: https://github.com/fefz/bitsdojo_window
+      ref: local-path
+      path: bitsdojo_window_macos/
+  bitsdojo_window_linux:
+    git:
+      url: https://github.com/fefz/bitsdojo_window
+      ref: local-path
+      path: bitsdojo_window_linux/

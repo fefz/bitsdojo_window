@@ -25,12 +25,12 @@ class WindowButtonContext {
 }
 
 class WindowButtonColors {
-  late Color normal;
-  late Color mouseOver;
-  late Color mouseDown;
-  late Color iconNormal;
-  late Color iconMouseOver;
-  late Color iconMouseDown;
+   Color normal;
+   Color mouseOver;
+   Color mouseDown;
+   Color iconNormal;
+   Color iconMouseOver;
+   Color iconMouseDown;
   WindowButtonColors(
       {Color normal,
       Color mouseOver,
