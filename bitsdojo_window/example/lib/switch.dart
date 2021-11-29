@@ -21,15 +21,15 @@ class AppSkin {
   final Color iconMouseDown;
 
   const AppSkin(
-      {required this.sidebar,
-      required this.backgroundStart,
-      required this.backgroundEnd,
-      required this.border,
-      required this.buttonMouseOver,
-      required this.buttonMouseDown,
-      required this.icon,
-      required this.iconMouseOver,
-      required this.iconMouseDown});
+      {@required this.sidebar,
+      @required this.backgroundStart,
+      @required this.backgroundEnd,
+      @required this.border,
+      @required this.buttonMouseOver,
+      @required this.buttonMouseDown,
+      @required this.icon,
+      @required this.iconMouseOver,
+      @required this.iconMouseDown});
 }
 
 AppSkin yellowSkin = const AppSkin(
@@ -94,12 +94,12 @@ class AppColors extends InheritedWidget {
   final AppSkin colors;
   //final Widget child;
   const AppColors({
-    Key? key,
-    required this.colors,
-    required Widget child,
+    Key key,
+    @required this.colors,
+    @required Widget child,
   }) : super(key: key, child: child);
 
-  static AppColors? of(BuildContext context) {
+  static AppColors of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<AppColors>();
   }
 
@@ -121,7 +121,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -130,7 +130,7 @@ class MyApp extends StatelessWidget {
 }
 
 class AppBody extends StatefulWidget {
-  const AppBody({Key? key}) : super(key: key);
+  const AppBody({Key key}) : super(key: key);
 
   @override
   _AppBodyState createState() => _AppBodyState();
@@ -165,11 +165,11 @@ class _AppBodyState extends State<AppBody> {
 }
 
 class LeftSide extends StatelessWidget {
-  const LeftSide({Key? key}) : super(key: key);
+  const LeftSide({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.of(context)!.colors;
+    final colors = AppColors.of(context).colors;
     return SizedBox(
         width: 200,
         child: Container(
@@ -181,11 +181,11 @@ class LeftSide extends StatelessWidget {
 }
 
 class RightSide extends StatelessWidget {
-  final VoidCallback? onButtonPressed;
-  const RightSide({Key? key, this.onButtonPressed}) : super(key: key);
+  final VoidCallback onButtonPressed;
+  const RightSide({Key key, this.onButtonPressed}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.of(context)!.colors;
+    final colors = AppColors.of(context).colors;
     return Expanded(
         child: Container(
             decoration: BoxDecoration(
@@ -202,7 +202,7 @@ class RightSide extends StatelessWidget {
                     child: RoundedFlatButton(
                         text: 'Switch',
                         onPressed: () {
-                          if (onButtonPressed != null) onButtonPressed!();
+                          if (onButtonPressed != null) onButtonPressed();
                         })),
               )
             ])));
@@ -210,7 +210,7 @@ class RightSide extends StatelessWidget {
 }
 
 class RightSideTopArea extends StatelessWidget {
-  const RightSideTopArea({Key? key}) : super(key: key);
+  const RightSideTopArea({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -221,11 +221,11 @@ class RightSideTopArea extends StatelessWidget {
 }
 
 class WindowButtons extends StatelessWidget {
-  const WindowButtons({Key? key}) : super(key: key);
+  const WindowButtons({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.of(context)!.colors;
+    final colors = AppColors.of(context).colors;
     final buttonColors = WindowButtonColors(
         iconNormal: colors.icon,
         iconMouseDown: colors.iconMouseDown,
@@ -249,14 +249,14 @@ class WindowButtons extends StatelessWidget {
 }
 
 class RoundedFlatButton extends StatelessWidget {
-  final void Function()? onPressed;
-  final Color? color;
-  final Color? mouseOverColor;
-  final Color? textColor;
-  final String? text;
+  final void Function() onPressed;
+  final Color color;
+  final Color mouseOverColor;
+  final Color textColor;
+  final String text;
 
   const RoundedFlatButton(
-      {Key? key,
+      {Key key,
       this.onPressed,
       this.color,
       this.mouseOverColor,

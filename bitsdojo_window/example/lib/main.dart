@@ -20,7 +20,7 @@ void main() {
 const borderColor = Color(0xFF805306);
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
 const sidebarColor = Color(0xFFF6A00C);
 
 class LeftSide extends StatelessWidget {
-  const LeftSide({Key? key}) : super(key: key);
+  const LeftSide({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -62,7 +62,7 @@ const backgroundStartColor = Color(0xFFFFD500);
 const backgroundEndColor = Color(0xFFF6A00C);
 
 class RightSide extends StatelessWidget {
-  const RightSide({Key? key}) : super(key: key);
+  const RightSide({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -100,7 +100,7 @@ final closeButtonColors = WindowButtonColors(
     iconMouseOver: Colors.white);
 
 class WindowButtons extends StatefulWidget {
-  const WindowButtons({Key? key}) : super(key: key);
+  const WindowButtons({Key key}) : super(key: key);
 
   @override
   _WindowButtonsState createState() => _WindowButtonsState();

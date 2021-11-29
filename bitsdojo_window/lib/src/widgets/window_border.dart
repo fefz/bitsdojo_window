@@ -7,17 +7,17 @@ import '../app_window.dart';
 class WindowBorder extends StatelessWidget {
   final Widget child;
   final Color color;
-  final double? width;
+  final double width;
 
-  WindowBorder({Key? key, required this.child, required this.color, this.width})
+  WindowBorder({Key key, @required this.child, @required this.color, this.width})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     bool isWindowsApp =
-        (!kIsWeb) && (defaultTargetPlatform == TargetPlatform.windows);
+        (kIsWeb) && (defaultTargetPlatform == TargetPlatform.windows);
     bool isLinuxApp =
-        (!kIsWeb) && (defaultTargetPlatform == TargetPlatform.linux);
+        (kIsWeb) && (defaultTargetPlatform == TargetPlatform.linux);
 
     // Only show border on Windows and Linux
     if (!(isWindowsApp || isLinuxApp)) {

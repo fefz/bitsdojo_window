@@ -15,13 +15,13 @@ typedef WindowButtonBuilder = Widget Function(
 class WindowButtonContext {
   BuildContext context;
   MouseState mouseState;
-  Color? backgroundColor;
+  Color backgroundColor;
   Color iconColor;
   WindowButtonContext(
-      {required this.context,
-      required this.mouseState,
+      {@required this.context,
+      @required this.mouseState,
       this.backgroundColor,
-      required this.iconColor});
+      @required this.iconColor});
 }
 
 class WindowButtonColors {
@@ -32,12 +32,12 @@ class WindowButtonColors {
   late Color iconMouseOver;
   late Color iconMouseDown;
   WindowButtonColors(
-      {Color? normal,
-      Color? mouseOver,
-      Color? mouseDown,
-      Color? iconNormal,
-      Color? iconMouseOver,
-      Color? iconMouseDown}) {
+      {Color normal,
+      Color mouseOver,
+      Color mouseDown,
+      Color iconNormal,
+      Color iconMouseOver,
+      Color iconMouseDown}) {
     this.normal = normal ?? _defaultButtonColors.normal;
     this.mouseOver = mouseOver ?? _defaultButtonColors.mouseOver;
     this.mouseDown = mouseDown ?? _defaultButtonColors.mouseDown;
@@ -56,16 +56,16 @@ final _defaultButtonColors = WindowButtonColors(
     iconMouseDown: Color(0xFFF0F0F0));
 
 class WindowButton extends StatelessWidget {
-  final WindowButtonBuilder? builder;
-  final WindowButtonIconBuilder? iconBuilder;
-  late final WindowButtonColors colors;
+  final WindowButtonBuilder builder;
+  final WindowButtonIconBuilder iconBuilder;
+  final WindowButtonColors colors;
   final bool animate;
-  final EdgeInsets? padding;
-  final VoidCallback? onPressed;
+  final EdgeInsets padding;
+  final VoidCallback onPressed;
 
   WindowButton(
-      {Key? key,
-      WindowButtonColors? colors,
+      {Key key,
+      WindowButtonColors colors,
       this.builder,
       @required this.iconBuilder,
       this.padding,
@@ -107,7 +107,7 @@ class WindowButton extends StatelessWidget {
             iconColor: getIconColor(mouseState));
 
         var icon = (this.iconBuilder != null)
-            ? this.iconBuilder!(buttonContext)
+            ? this.iconBuilder(buttonContext)
             : Container();
         double borderSize = appWindow.borderSize;
         double defaultPadding =
@@ -125,13 +125,13 @@ class WindowButton extends StatelessWidget {
             color: buttonContext.backgroundColor ?? fadeOutColor,
             child: iconWithPadding);
         var button = (this.builder != null)
-            ? this.builder!(buttonContext, icon)
+            ? this.builder(buttonContext, icon)
             : iconWithPadding;
         return SizedBox(
             width: buttonSize.width, height: buttonSize.height, child: button);
       },
       onPressed: () {
-        if (this.onPressed != null) this.onPressed!();
+        if (this.onPressed != null) this.onPressed();
       },
     );
   }
@@ -139,10 +139,10 @@ class WindowButton extends StatelessWidget {
 
 class MinimizeWindowButton extends WindowButton {
   MinimizeWindowButton(
-      {Key? key,
-      WindowButtonColors? colors,
-      VoidCallback? onPressed,
-      bool? animate})
+      {Key key,
+      WindowButtonColors colors,
+      VoidCallback onPressed,
+      bool animate})
       : super(
             key: key,
             colors: colors,
@@ -154,10 +154,10 @@ class MinimizeWindowButton extends WindowButton {
 
 class MaximizeWindowButton extends WindowButton {
   MaximizeWindowButton(
-      {Key? key,
-      WindowButtonColors? colors,
-      VoidCallback? onPressed,
-      bool? animate})
+      {Key key,
+      WindowButtonColors colors,
+      VoidCallback onPressed,
+      bool animate})
       : super(
             key: key,
             colors: colors,
@@ -169,10 +169,10 @@ class MaximizeWindowButton extends WindowButton {
 
 class RestoreWindowButton extends WindowButton {
   RestoreWindowButton(
-      {Key? key,
-      WindowButtonColors? colors,
-      VoidCallback? onPressed,
-      bool? animate})
+      {Key key,
+      WindowButtonColors colors,
+      VoidCallback onPressed,
+      bool animate})
       : super(
             key: key,
             colors: colors,
@@ -190,10 +190,10 @@ final _defaultCloseButtonColors = WindowButtonColors(
 
 class CloseWindowButton extends WindowButton {
   CloseWindowButton(
-      {Key? key,
-      WindowButtonColors? colors,
-      VoidCallback? onPressed,
-      bool? animate})
+      {Key key,
+      WindowButtonColors colors,
+      VoidCallback onPressed,
+      bool animate})
       : super(
             key: key,
             colors: colors ?? _defaultCloseButtonColors,

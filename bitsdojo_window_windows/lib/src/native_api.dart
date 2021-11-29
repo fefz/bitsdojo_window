@@ -7,7 +7,7 @@ final DynamicLibrary _appExecutable = DynamicLibrary.executable();
 // isBitsdojoWindowLoaded
 typedef Int8 TIsBitsdojoWindowLoaded();
 typedef DTIsBitsdojoWindowLoaded = int Function();
-final DTIsBitsdojoWindowLoaded? _isBitsdojoWindowLoaded =
+final DTIsBitsdojoWindowLoaded _isBitsdojoWindowLoaded =
     _publicAPI.ref.isBitsdojoWindowLoaded.asFunction();
 
 bool isBitsdojoWindowLoaded() {

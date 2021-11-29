@@ -31,11 +31,11 @@ class NotImplementedWindow extends DesktopWindow {
     throw UnimplementedError('position setter has not been implemented.');
   }
 
-  set minSize(Size? newSize) {
+  set minSize(Size newSize) {
     throw UnimplementedError('minSize setter has not been implemented.');
   }
 
-  set maxSize(Size? newSize) {
+  set maxSize(Size newSize) {
     throw UnimplementedError('maxSize setter has not been implemented.');
   }
 
@@ -43,7 +43,7 @@ class NotImplementedWindow extends DesktopWindow {
     throw UnimplementedError('alignment getter has not been implemented.');
   }
 
-  set alignment(Alignment? newAlignment) {
+  set alignment(Alignment newAlignment) {
     throw UnimplementedError('alignment setter has not been implemented.');
   }
 
